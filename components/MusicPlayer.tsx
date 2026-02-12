@@ -140,11 +140,12 @@ export const MusicPlayer: React.FC = () => {
       </div>
 
       {/* Audio */}
-      <audio 
-        ref={audioRef}
-        src="Kadhaippoma.mp3"
-        loop
-      />
+     <audio 
+     ref={audioRef}
+     src={import.meta.env.BASE_URL + "Kadhaippoma.mp3"}
+     loop
+    />
+
     </section>
   );
 };

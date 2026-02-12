@@ -47,10 +47,11 @@ export const BackgroundMusic: React.FC = () => {
     <>
       {/* Audio */}
       <audio
-        ref={audioRef}
-        src="/song.mp3"
-        loop
-      />
+     ref={audioRef}
+     src={import.meta.env.BASE_URL + "song.mp3"}
+     loop
+    />
+
 
       {/* Small speaker icon in corner */}
       {showIcon && (
