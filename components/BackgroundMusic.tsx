@@ -10,20 +10,24 @@ export const BackgroundMusic: React.FC = () => {
     if (!audio) return;
 
     audio.volume = 0.4;
-    audio.muted = true; // 🔇 start muted
-    audio.play().catch(() => {}); // allowed because muted
+    audio.muted = false; // don't start muted
 
     const enableSound = () => {
-      audio.muted = false; // 🔊 unmute on first interaction
-      audio.play().catch(() => {});
-      setShowIcon(false); // hide icon
+      audio
+        .play()
+        .then(() => {
+          setShowIcon(false); // hide icon when music starts
+        })
+        .catch((e) => {
+          console.log("Play blocked:", e);
+        });
 
       window.removeEventListener("click", enableSound);
       window.removeEventListener("touchstart", enableSound);
       window.removeEventListener("keydown", enableSound);
     };
 
-    // Any first user interaction will enable sound
+    // First real user interaction will start music
     window.addEventListener("click", enableSound);
     window.addEventListener("touchstart", enableSound);
     window.addEventListener("keydown", enableSound);
@@ -47,11 +51,10 @@ export const BackgroundMusic: React.FC = () => {
     <>
       {/* Audio */}
       <audio
-     ref={audioRef}
-     src={import.meta.env.BASE_URL + "song.mp3"}
-     loop
-    />
-
+        ref={audioRef}
+        src={import.meta.env.BASE_URL + "song.mp3"}
+        loop
+      />
 
       {/* Small speaker icon in corner */}
       {showIcon && (
