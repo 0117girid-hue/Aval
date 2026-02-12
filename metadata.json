@@ -1,0 +1,8 @@
+
+{
+  "name": "Ethereal Valentine - A Romantic Journey",
+  "description": "A soft, pastel-themed romantic website featuring a love timeline, photo gallery, romantic notes, music player, and an AI-powered love poem generator.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
