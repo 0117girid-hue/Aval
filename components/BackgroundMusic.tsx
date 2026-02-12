@@ -10,27 +10,6 @@ export const BackgroundMusic: React.FC = () => {
     if (!audio) return;
 
     audio.volume = 0.4;
-    audio.muted = false; // don't start muted
-
-    const enableSound = () => {
-      audio
-        .play()
-        .then(() => {
-          setShowIcon(false); // hide icon when music starts
-        })
-        .catch((e) => {
-          console.log("Play blocked:", e);
-        });
-
-      window.removeEventListener("click", enableSound);
-      window.removeEventListener("touchstart", enableSound);
-      window.removeEventListener("keydown", enableSound);
-    };
-
-    // First real user interaction will start music
-    window.addEventListener("click", enableSound);
-    window.addEventListener("touchstart", enableSound);
-    window.addEventListener("keydown", enableSound);
 
     const pauseGlobal = () => audio.pause();
     const playGlobal = () => audio.play().catch(() => {});
@@ -41,9 +20,6 @@ export const BackgroundMusic: React.FC = () => {
     return () => {
       window.removeEventListener("pause-global-music", pauseGlobal);
       window.removeEventListener("play-global-music", playGlobal);
-      window.removeEventListener("click", enableSound);
-      window.removeEventListener("touchstart", enableSound);
-      window.removeEventListener("keydown", enableSound);
     };
   }, []);
 
@@ -56,12 +32,23 @@ export const BackgroundMusic: React.FC = () => {
         loop
       />
 
-      {/* Small speaker icon in corner */}
+      {/* Speaker button (user click starts music) */}
       {showIcon && (
         <div className="fixed bottom-6 right-6 z-50">
-          <div className="w-12 h-12 bg-pink-500 text-white rounded-full shadow-lg flex items-center justify-center animate-pulse">
+          <button
+            onClick={() => {
+              if (audioRef.current) {
+                audioRef.current
+                  .play()
+                  .then(() => setShowIcon(false))
+                  .catch((e) => console.log("Play blocked:", e));
+              }
+            }}
+            className="w-12 h-12 bg-pink-500 text-white rounded-full shadow-lg flex items-center justify-center animate-pulse"
+            aria-label="Play background music"
+          >
             <Volume2 />
-          </div>
+          </button>
         </div>
       )}
     </>
