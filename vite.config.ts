@@ -3,5 +3,5 @@ import react from "@vitejs/plugin-react";
 
 export default defineConfig(({ mode }) => ({
   plugins: [react()],
-  base: mode === "production" ? "/Aval/" : "/",
+  base: mode === "production" ? "/Aval/" : "/",  // ✅ GitHub + Local both
 }));

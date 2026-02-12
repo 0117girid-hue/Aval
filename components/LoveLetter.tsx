@@ -5,12 +5,7 @@ import { Heart } from 'lucide-react';
 
 const letterContent = `My Dearest,
 
-Words often fall short when I try to express how much you mean to me. Every moment we spend together feels like a beautiful dream that I never want to wake up from. You are my sunshine on cloudy days, my comfort in times of worry, and my greatest adventure.
-
-Thank you for being you, for loving me unconditionally, and for making life so incredibly sweet. I promise to cherish you, laugh with you, and walk beside you through every season of life.
-
-Happy Valentine's Day, my love. Today, tomorrow, and forever.
-
+hiiiiii
 Yours always,
 Me`;
 
